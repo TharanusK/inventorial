@@ -12,7 +12,6 @@
 - [TypeScript](https://www.typescriptlang.org/)
 - [Supabase](https://supabase.com/) (Auth, DB, Edge Functions)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [ShadCN/UI](https://ui.shadcn.com/) (UI components)
 
 ---
 
@@ -28,12 +27,3 @@
 - 📤 Export Reports (optional)
 
 ---
-
-## 🛠️ Getting Started
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/TharanusK/inventorial.git
-   cd inventorial
-   ```
