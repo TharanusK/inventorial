@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Label } from "@/components/ui/label";
 
 export function SideBanner() {
   return (
@@ -11,24 +10,24 @@ export function SideBanner() {
           width={90}
           height={90}
         />
-        <Label className=" text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        <p className=" text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
           Inventorial
-        </Label>
+        </p>
       </div>
 
       <div className="flex flex-col gap-4 mt-16">
-        <Label className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
           Access Your
-        </Label>
-        <Label className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        </p>
+        <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
           Inventory.
-        </Label>
-        <Label className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        </p>
+        <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
           Anytime.
-        </Label>
-        <Label className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+        </p>
+        <p className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
           Anywhere.
-        </Label>
+        </p>
       </div>
     </div>
   );
