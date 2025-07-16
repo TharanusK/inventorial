@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import Sidebar from "@/components/sidebar";
 
 export default async function ProtectedLayout({
@@ -18,12 +17,10 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center">
+    <main className="min-h-screen flex items-center">
       <Sidebar />
-      <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-        {children}
-      </div>
-      <ThemeSwitcher />
+      {/* padding-left: 6rem due to that equal width of the sidebar */}
+      <div className="flex-1 flex flex-col w-full">{children}</div>
     </main>
   );
 }
