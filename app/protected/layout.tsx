@@ -17,10 +17,9 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <main className="min-h-screen flex items-center">
+    <main className="min-h-screen flex ">
       <Sidebar />
-      {/* padding-left: 6rem due to that equal width of the sidebar */}
-      <div className="flex-1 flex flex-col w-full">{children}</div>
+      <div className="flex-1 flex flex-col w-full ml-16">{children}</div>
     </main>
   );
 }
