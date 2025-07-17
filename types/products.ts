@@ -9,7 +9,7 @@ export type Product = {
   updated_at: string;
 };
 
-export type AddProductActionResult = {
+export type ProductActionResult = {
   success: boolean;
   errors?: {
     name?: string;

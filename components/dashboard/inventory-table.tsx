@@ -107,7 +107,7 @@ export default function InventoryTable({
       renderCell: (params: { row: Product }) => (
         <div className="flex items-center gap-2">
           <Tooltip title="Edit">
-            <Link href={`/proteced/product/edit/${params.row.id}`}>
+            <Link href={`/protected/product/edit?product_id=${params.row.id}`}>
               <EditIcon fontSize="small" sx={{ color: "#6D67C6" }} />
             </Link>
           </Tooltip>

@@ -1,24 +1,48 @@
 "use client";
 
 import { useActionState } from "react";
-import { addProduct } from "@/actions/products/action";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { AddProductActionResult } from "@/types/products";
 import Link from "next/link";
 
-export default function AddProductForm() {
+import { ProductActionResult } from "@/types/products";
+
+type ProductFormProps = {
+  initialValues?: {
+    name: string;
+    sku: string;
+    quantity: number;
+    unit: string;
+    low_stock_threshold: number;
+  };
+  onSubmit: (
+    prevState: ProductActionResult | null,
+    formData: FormData
+  ) => Promise<ProductActionResult>;
+  submitLabel?: string;
+};
+
+export default function ProductForm({
+  initialValues,
+  onSubmit,
+  submitLabel = "Add Product",
+}: Readonly<ProductFormProps>) {
   const [state, formAction] = useActionState<
-    AddProductActionResult | null,
+    ProductActionResult | null,
     FormData
-  >(addProduct, null);
+  >(onSubmit, null);
 
   return (
     <form action={formAction} className="gap-4 flex flex-col">
       <div>
         <Label htmlFor="name">Product Name</Label>
-        <Input name="name" id="name" required />
+        <Input
+          name="name"
+          id="name"
+          required
+          defaultValue={initialValues?.name || ""}
+        />
         {state?.errors?.name && (
           <p className="text-error text-sm">{state.errors.name}</p>
         )}
@@ -26,7 +50,12 @@ export default function AddProductForm() {
 
       <div>
         <Label htmlFor="sku">SKU</Label>
-        <Input name="sku" id="sku" required />
+        <Input
+          name="sku"
+          id="sku"
+          required
+          defaultValue={initialValues?.sku || ""}
+        />
         {state?.errors?.sku && (
           <p className="text-error text-sm">{state.errors.sku}</p>
         )}
@@ -34,7 +63,13 @@ export default function AddProductForm() {
 
       <div>
         <Label htmlFor="quantity">Quantity</Label>
-        <Input name="quantity" id="quantity" type="number" required />
+        <Input
+          name="quantity"
+          id="quantity"
+          type="number"
+          required
+          defaultValue={initialValues?.quantity ?? ""}
+        />
         {state?.errors?.quantity && (
           <p className="text-error text-sm">{state.errors.quantity}</p>
         )}
@@ -42,7 +77,12 @@ export default function AddProductForm() {
 
       <div>
         <Label htmlFor="unit">Unit</Label>
-        <Input name="unit" id="unit" required />
+        <Input
+          name="unit"
+          id="unit"
+          required
+          defaultValue={initialValues?.unit || ""}
+        />
         {state?.errors?.unit && (
           <p className="text-error text-sm">{state.errors.unit}</p>
         )}
@@ -55,6 +95,7 @@ export default function AddProductForm() {
           id="low_stock_threshold"
           type="number"
           required
+          defaultValue={initialValues?.low_stock_threshold ?? ""}
         />
         {state?.errors?.low_stock_threshold && (
           <p className="text-error text-sm">
@@ -62,15 +103,17 @@ export default function AddProductForm() {
           </p>
         )}
       </div>
+
       {state?.errors?.form && (
         <p className="text-error text-sm">{state.errors.form}</p>
       )}
+
       <div className="flex gap-6 justify-center mt-4 sm:justify-end">
-        <Button type="reset" variant="outline" size={"lg"}>
-          <Link href="/protected/dashboard">Cancle</Link>
+        <Button type="reset" variant="outline" size="lg">
+          <Link href="/protected/dashboard">Cancel</Link>
         </Button>
-        <Button type="submit" size={"lg"}>
-          Add Product
+        <Button type="submit" size="lg">
+          {submitLabel}
         </Button>
       </div>
     </form>
