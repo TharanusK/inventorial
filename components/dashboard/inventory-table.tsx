@@ -3,8 +3,8 @@ import { use } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Tooltip from "@mui/material/Tooltip";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import { format } from "date-fns";
 import { Product } from "@/types/products";
+import { format } from "date-fns";
 
 interface InventoryTableProps {
   products: Promise<Product[]>;
@@ -20,7 +20,6 @@ export default function InventoryTable({
       field: "name",
       headerName: "Product Name",
       flex: 1,
-      headerClassName: "super-app-theme--header",
     },
     { field: "sku", headerName: "SKU", flex: 1 },
     {
@@ -48,7 +47,7 @@ export default function InventoryTable({
       field: "updated_at",
       headerName: "Last Updated",
       flex: 1,
-      valueGetter: (params: { row: Product }) =>
+      renderCell: (params: { row: Product }) =>
         format(new Date(params.row.updated_at), "yyyy-MM-dd HH:mm"),
     },
   ];
@@ -62,7 +61,12 @@ export default function InventoryTable({
         checkboxSelection
         disableRowSelectionOnClick
         pageSizeOptions={[10, 25, 50]}
-        sx={{ borderRadius: "8px" }}
+        sx={{
+          borderRadius: "8px",
+          "& .MuiDataGrid-cell:hover": {
+            color: "#6D67C6",
+          },
+        }}
       />
     </div>
   );

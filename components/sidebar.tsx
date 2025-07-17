@@ -1,15 +1,15 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutGrid, Activity } from "lucide-react";
 import Image from "next/image";
 import { ThemeSwitcher } from "./theme-switcher";
-
+import GridViewIcon from "@mui/icons-material/GridView";
+import HistoryIcon from "@mui/icons-material/History";
 const navItems = [
-  { href: "/protected/dashboard", icon: <LayoutGrid />, label: "Dashboard" },
+  { href: "/protected/dashboard", icon: <GridViewIcon />, label: "Dashboard" },
   {
     href: "/protected/activity",
-    icon: <Activity />,
+    icon: <HistoryIcon />,
     label: "Activity Logs",
   },
 ];

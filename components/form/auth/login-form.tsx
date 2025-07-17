@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { SideBanner } from "./side-banner";
+import { SideBanner } from "../../auth/side-banner";
 
 export function LoginForm({
   className,

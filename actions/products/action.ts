@@ -1,6 +1,8 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { AddProductActionResult } from "@/types/products";
+import { redirect } from "next/navigation";
 
 export async function getAllProducts() {
   const supabase = await createClient();
@@ -16,4 +18,60 @@ export async function getAllProducts() {
   }
 
   return data;
+}
+
+export async function addProduct(
+  _: unknown,
+  formData: FormData
+): Promise<AddProductActionResult> {
+  const errors: Record<string, string> = {};
+
+  const nameValue = formData.get("name");
+  const name = typeof nameValue === "string" ? nameValue.trim() : "";
+  const skuValue = formData.get("sku");
+  const sku = typeof skuValue === "string" ? skuValue.trim() : "";
+  const quantity = Number(formData.get("quantity"));
+  const unitValue = formData.get("unit");
+  const unit = typeof unitValue === "string" ? unitValue.trim() : "";
+  const low_stock_threshold = Number(formData.get("low_stock_threshold"));
+
+  // Validation
+  if (!name) errors.name = "Name is required.";
+  if (!sku) errors.sku = "SKU is required.";
+  if (!unit) errors.unit = "Unit is required.";
+  if (isNaN(quantity) || quantity < 0)
+    errors.quantity = "Quantity must be a valid number.";
+  if (isNaN(low_stock_threshold) || low_stock_threshold < 0) {
+    errors.low_stock_threshold = "Low stock threshold must be a valid number.";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return { success: false, errors };
+  }
+
+  const supabase = await createClient();
+
+  const { data } = await supabase.auth.getUser();
+
+  const { error } = await supabase.from("products").insert([
+    {
+      name,
+      sku,
+      quantity,
+      unit,
+      low_stock_threshold,
+      created_by: data.user?.id,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+  ]);
+
+  if (error) {
+    return {
+      success: false,
+      errors: { form: "Failed to add product: " + error.message },
+    };
+  }
+
+  redirect("/protected/dashboard");
 }
