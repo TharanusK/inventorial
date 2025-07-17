@@ -15,7 +15,7 @@ export default function Layout({
   const hideSidebar = hiddenSidebarRoutes.includes(pathname);
 
   return (
-    <main className="min-h-screen flex ">
+    <main className="min-h-screen flex w-screen">
       {!hideSidebar && <Sidebar />}
       <div
         className={`flex-1 flex flex-col w-full ${hideSidebar ? "" : "ml-16"}`}

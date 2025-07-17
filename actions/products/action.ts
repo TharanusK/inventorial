@@ -75,3 +75,20 @@ export async function addProduct(
 
   redirect("/protected/dashboard");
 }
+
+export async function deleteProduct(id: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.from("products").delete().eq("id", id);
+
+  if (error) {
+    console.error("Error deleting product:", error.message);
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+  return {
+    success: true,
+  };
+}

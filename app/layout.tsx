@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
+import { toastConfig } from "@/config/ToastConfig";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -35,6 +37,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <ToastContainer {...toastConfig} />
       </body>
     </html>
   );

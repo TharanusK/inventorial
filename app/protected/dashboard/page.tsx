@@ -9,7 +9,7 @@ export default async function DashBoardPage() {
   const products = getAllProducts();
 
   return (
-    <div className="flex w-full flex-col min-h-screen p-9 border-2 border-gray-200 text-center gap-10 sm:text-left ">
+    <div className="flex w-full flex-col min-h-screen p-9 text-center gap-10 sm:text-left ">
       <Header title="Dashboard" />
 
       <Button asChild size="sm" variant={"default"} className="w-fit">
