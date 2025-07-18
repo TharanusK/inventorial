@@ -5,17 +5,26 @@ import Image from "next/image";
 import { ThemeSwitcher } from "./theme-switcher";
 import GridViewIcon from "@mui/icons-material/GridView";
 import HistoryIcon from "@mui/icons-material/History";
-const navItems = [
-  { href: "/protected/dashboard", icon: <GridViewIcon />, label: "Dashboard" },
-  {
-    href: "/protected/activity",
-    icon: <HistoryIcon />,
-    label: "Activity Logs",
-  },
-];
 
-export default function Sidebar() {
+export default function Sidebar({ isAdmin }: Readonly<{ isAdmin: boolean }>) {
   const pathname = usePathname();
+
+  const navItems = [
+    {
+      href: "/protected/dashboard",
+      icon: <GridViewIcon />,
+      label: "Dashboard",
+    },
+    ...(isAdmin
+      ? [
+          {
+            href: "/protected/activity",
+            icon: <HistoryIcon />,
+            label: "Activity Logs",
+          },
+        ]
+      : []),
+  ];
 
   return (
     <aside className=" fixed top-0 left-0 h-screen w-16 bg-primary flex flex-col items-center py-6 text-white">

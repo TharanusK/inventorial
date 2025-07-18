@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
 import Layout from "@/components/Layout/with-sidebar-layout";
+import { isUserAdmin } from "@/actions/auth/action";
 
 export default async function ProtectedLayout({
   children,
@@ -16,5 +17,7 @@ export default async function ProtectedLayout({
     redirect("/auth/login");
   }
 
-  return <Layout>{children}</Layout>;
+  const isAdmin = await isUserAdmin(data?.user.id);
+
+  return <Layout isAdmin={isAdmin}>{children}</Layout>;
 }

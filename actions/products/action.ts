@@ -130,6 +130,17 @@ export async function editProduct(
 
   const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      success: false,
+      errors: { form: "Unauthorized: user not found." },
+    };
+  }
+
   const { error } = await supabase
     .from("products")
     .update({
@@ -139,6 +150,7 @@ export async function editProduct(
       unit,
       low_stock_threshold,
       updated_at: new Date().toISOString(),
+      updated_by: user.id,
     })
     .eq("id", productId);
 
@@ -154,6 +166,33 @@ export async function editProduct(
 export async function deleteProduct(id: string) {
   const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      success: false,
+      error: "Unauthorized: user not found.",
+    };
+  }
+
+  const { error: updateError } = await supabase
+    .from("products")
+    .update({ updated_by: user.id })
+    .eq("id", id);
+
+  if (updateError) {
+    console.error(
+      "Error setting updated_by before deletion:",
+      updateError.message
+    );
+    return {
+      success: false,
+      error: updateError.message,
+    };
+  }
+
   const { error } = await supabase.from("products").delete().eq("id", id);
 
   if (error) {
@@ -163,6 +202,7 @@ export async function deleteProduct(id: string) {
       error: error.message,
     };
   }
+
   return {
     success: true,
   };

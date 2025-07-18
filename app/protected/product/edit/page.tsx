@@ -13,7 +13,7 @@ export default async function EditProductPage({
 
   return (
     <div className="flex w-full flex-col min-h-screen p-16 gap-6">
-      <GoBackButtonWithTitle href="/protected/dashboard" title="Add Product" />
+      <GoBackButtonWithTitle href="/protected/dashboard" title="Edit Product" />
       <ProductForm
         onSubmit={editProduct.bind(null, productId)}
         initialValues={{

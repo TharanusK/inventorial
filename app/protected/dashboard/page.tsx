@@ -44,8 +44,7 @@ export default function DashBoardPage() {
         </div>
 
         <div className="flex gap-2 items-center">
-          {" "}
-          <Button asChild size="sm" variant={"default"} className="w-fit">
+          <Button asChild size="sm" className="w-fit bg-[#A3C9A8]">
             <Link href="/protected/product/add">Add Product</Link>
           </Button>
         </div>
