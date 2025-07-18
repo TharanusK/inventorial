@@ -1,5 +1,5 @@
 "use client";
-import { use, useState } from "react";
+import { useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Tooltip from "@mui/material/Tooltip";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
@@ -16,6 +16,8 @@ import { Button } from "../ui/button";
 import { deleteProduct } from "@/actions/products/action";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import CustomToolbar from "./toolbar-table";
+
 const modalStyles = {
   position: "absolute",
   top: "50%",
@@ -30,7 +32,7 @@ const modalStyles = {
 };
 
 interface InventoryTableProps {
-  products: Promise<Product[]>;
+  products: Product[];
 }
 
 export default function InventoryTable({
@@ -58,8 +60,6 @@ export default function InventoryTable({
     handleClose();
     router.push("/protected/dashboard");
   };
-
-  const resolvedProducts = use(products);
 
   const columns: GridColDef[] = [
     {
@@ -124,11 +124,13 @@ export default function InventoryTable({
   return (
     <div className="h-[600px] w-full ">
       <DataGrid
-        rows={resolvedProducts}
+        rows={products}
         columns={columns}
         getRowId={(row) => row.id}
         checkboxSelection
         disableRowSelectionOnClick
+        showToolbar
+        slots={{ toolbar: CustomToolbar }}
         pageSizeOptions={[10, 25, 50]}
         localeText={{
           noRowsLabel: "No products",

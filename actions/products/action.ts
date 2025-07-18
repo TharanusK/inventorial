@@ -4,13 +4,19 @@ import { createClient } from "@/lib/supabase/server";
 import { ProductActionResult } from "@/types/products";
 import { redirect } from "next/navigation";
 
-export async function getAllProducts() {
+export async function getAllProducts(search?: string) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("products")
     .select("*")
     .order("created_at", { ascending: false });
+
+  if (search && search.trim() !== "") {
+    query = query.or(`name.ilike.%${search}%,sku.ilike.%${search}%`);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("Error fetching products:", error.message);
