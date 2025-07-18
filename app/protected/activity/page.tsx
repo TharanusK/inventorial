@@ -41,7 +41,7 @@ export default function ActivityPage() {
             <SearchIcon />
           </span>
           <Input
-            className="pl-10 bg-[#FAFAFA] rounded-lg placeholder:text-sm"
+            className="pl-10  bg-card rounded-lg placeholder:text-sm"
             placeholder="Search products or users"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -80,10 +80,10 @@ export default function ActivityPage() {
             return (
               <div
                 key={log.id}
-                className="border border-border rounded-lg p-4 bg-white shadow-sm gap-1 flex flex-col"
+                className="border border-border rounded-lg p-4  bg-card shadow-sm gap-1 flex flex-col"
               >
                 <div className="text-sm font-semibold capitalize flex items-center gap-2 ">
-                  <div className="bg-gray-200 w-fit rounded-xl px-3 py-2">
+                  <div className="bg-primary w-fit rounded-xl px-3 py-2 text-white">
                     {
                       {
                         add_product: "Added",
@@ -96,7 +96,7 @@ export default function ActivityPage() {
                 </div>
 
                 {log.action === "edit_product" ? (
-                  <div className="flex flex-col text-sm text-muted-foreground">
+                  <div className="flex flex-col text-sm text-foreground">
                     <strong>Product:</strong> {log.product?.name || "-"} (
                     {log.product?.sku || "-"})<strong>Changes:</strong>
                     {Object.entries(detail)
@@ -106,7 +106,7 @@ export default function ActivityPage() {
                       .join(", ")}
                   </div>
                 ) : (
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-foreground">
                     <strong>Product:</strong> {productName} ({sku})
                   </div>
                 )}

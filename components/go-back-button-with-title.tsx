@@ -11,7 +11,7 @@ export default function GoBackButtonWithTitle({
   return (
     <div className="flex w-full items-center gap-1">
       <Link href={href}>
-        <ArrowBackIosIcon sx={{ color: "#1F1F1F" }} />
+        <ArrowBackIosIcon sx={{ color: "hsl(var(--foreground))" }} />
       </Link>
       <p className="text-3xl">{title} </p>
     </div>

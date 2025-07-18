@@ -20,7 +20,11 @@ export default function CustomToolbar() {
         alignItems: "center",
       }}
     >
-      <Typography fontWeight="medium" marginLeft={2}>
+      <Typography
+        fontWeight="medium"
+        marginLeft={2}
+        className="text-foreground"
+      >
         Product Inventory
       </Typography>
 
@@ -33,7 +37,7 @@ export default function CustomToolbar() {
           aria-expanded={exportMenuOpen ? "true" : undefined}
           onClick={() => setExportMenuOpen(true)}
         >
-          <FileDownloadIcon fontSize="small" />
+          <FileDownloadIcon fontSize="small" className="text-foreground" />
         </ToolbarButton>
       </Tooltip>
     </Toolbar>
