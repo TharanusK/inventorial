@@ -36,7 +36,7 @@ export default function DashBoardPage() {
             <SearchIcon />
           </span>
           <Input
-            className="pl-10 bg-[#FAFAFA] rounded-lg placeholder:text-sm"
+            className="pl-10 bg-card rounded-lg placeholder:text-sm"
             placeholder="Search "
             value={search}
             onChange={(e) => setSearch(e.target.value)}

@@ -23,7 +23,7 @@ const modalStyles = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "#F5F6FA",
+  backgroundColor: "hsl(var(--card))",
   border: "3px solid rgba(0, 0, 0, 0.1)",
   boxShadow: 24,
   p: 4,
@@ -122,7 +122,7 @@ export default function InventoryTable({
   ];
 
   return (
-    <div className="h-[600px] w-full ">
+    <div className="h-[600px] w-full bg-card  ">
       <DataGrid
         rows={products}
         columns={columns}
@@ -140,18 +140,63 @@ export default function InventoryTable({
         sx={{
           borderRadius: 2,
           border: "1px solid #E5E7EB",
+          backgroundColor: "transparent",
+          // Column headers background and text
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#F3F4F6",
-            fontWeight: "bold",
+            backgroundColor: "hsl(var(--card))",
+            color: "hsl(var(--foreground))",
           },
+          "& .MuiDataGrid-columnHeader": {
+            backgroundColor: "hsl(var(--card))",
+            color: "hsl(var(--foreground))",
+          },
+
+          // Cell text color
+          "& .MuiDataGrid-cell": {
+            color: "hsl(var(--foreground))",
+          },
+
+          // Hovered row
           "& .MuiDataGrid-row:hover": {
-            backgroundColor: " rgba(109, 103, 198, 0.1)",
+            backgroundColor: "rgba(109, 103, 198, 0.1)",
           },
+
+          // Remove blue focus outline
           "& .MuiDataGrid-cell:focus": {
             outline: "none",
           },
+
+          // Hover color override
           "& .MuiDataGrid-cell:hover": {
-            color: "#6D67C6",
+            color: "hsl(var(--bg-foreground))",
+          },
+          // Checkbox color (unchecked + checked)
+          "& .MuiCheckbox-root": {
+            color: "hsl(var(--foreground))",
+          },
+
+          "& .MuiDataGrid-row.Mui-selected": {
+            backgroundColor: "hsl(var(--muted)) !important",
+            color: "hsl(var(--foreground)) !important",
+          },
+
+          "& .MuiDataGrid-row.Mui-selected:hover": {
+            backgroundColor: "hsl(var(--muted)) !important",
+          },
+
+          // Footer row selection label
+          "& .MuiDataGrid-selectedRowCount": {
+            color: "hsl(var(--foreground))",
+          },
+
+          // Pagination buttons (arrows, numbers)
+          "& .MuiTablePagination-actions button": {
+            color: "hsl(var(--foreground))",
+          },
+
+          // Column menu (3 dots)
+          "& .MuiDataGrid-menuIcon": {
+            color: "hsl(var(--foreground))",
           },
         }}
       />
@@ -178,8 +223,13 @@ export default function InventoryTable({
               action cannot be undone.
             </p>
             <div className="flex gap-6 justify-center mt-4 sm:justify-end">
-              <Button type="reset" variant="outline" size={"lg"}>
-                <Link href="/protected/dashboard">Cancle</Link>
+              <Button
+                type="reset"
+                variant="outline"
+                size={"lg"}
+                onClick={handleClose}
+              >
+                Cancle
               </Button>
               <Button
                 className="bg-error"
