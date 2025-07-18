@@ -28,8 +28,8 @@ export default function Layout({
       >
         {children}
       </div>
-      <div className="fixed top-4 right-4">
-        <LogoutButton/>
+      <div className="absolute top-4 right-4">
+        <LogoutButton />
       </div>
     </main>
   );
