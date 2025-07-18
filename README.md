@@ -10,7 +10,7 @@
 
 - [Next.js](https://nextjs.org/) (App Router)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Supabase](https://supabase.com/) (Auth, DB, Edge Functions)
+- [Supabase](https://supabase.com/) (Auth, DB)
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ---
@@ -21,9 +21,9 @@
 - 📦 Product Management (CRUD)
 - 📊 Inventory Dashboard
 - 🔍 Search by Product Name or SKU
-- 📉 Low Stock Alerts (coming soon)
+- 📉 Low Stock Alerts
 - 🧑‍🤝‍🧑 Role-based Access (Admin, Staff)
 - 🕓 Activity Logs
-- 📤 Export Reports (optional)
+- 📤 Export Reports
 
 ---
