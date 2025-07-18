@@ -1,16 +1,23 @@
-import { ThemeSwitcher } from "@/components/theme-switcher";
+import { redirect } from "next/navigation";
 
-export default function ProtectedLayout({
+import { createClient } from "@/lib/supabase/server";
+import Layout from "@/components/Layout/with-sidebar-layout";
+import { isUserAdmin } from "@/actions/auth/action";
+
+export default async function ProtectedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-        {children}
-      </div>
-      <ThemeSwitcher />
-    </main>
-  );
+  //Authentication
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect("/auth/login");
+  }
+
+  const isAdmin = await isUserAdmin(data?.user.id);
+
+  return <Layout isAdmin={isAdmin}>{children}</Layout>;
 }

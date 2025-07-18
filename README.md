@@ -2,7 +2,7 @@
 
 **Inventorial** is a modern web-based inventory management system built with Next.js and Supabase. Designed for small businesses and warehouse operators, it helps you manage products, stock levels, and user activity efficiently.
 
-<img alt="Inventorial Access your inventory anytime anywhere" src="/app/README.png">
+<img alt="Inventorial Access your inventory anytime anywhere" src="/public/images/README.png">
 
 ---
 
